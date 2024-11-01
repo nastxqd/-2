@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Магазин</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <a href="index.html">Главная</a>
+      <a href="shop.html">Магазин</a>
+      <a href="contacts.html">Контакты</a>
+      <a href="login.php">Вход</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Наши товары</h2>
+    <div class="products">
+      <?php
+      include 'database.php';
+      $result = $conn->query("SELECT * FROM products");
+
+      while($row = $result->fetch_assoc()) {
+          echo "<div class='product'>";
+          echo "<img src='" . $row['image'] . "' alt='" . $row['name'] . "'>";
+          echo "<h3>" . $row['name'] . "</h3>";
+          echo "<p>Цена: " . $row['price'] . " руб.</p>";
+          echo "<a href='product.html?id=" . $row['id'] . "'>Подробнее</a>";
+          echo "</div>";
+      }
+      ?>
+    </div>
+  </main>
+
+  <footer>
+    <p>Контакты: info@shop.com | Тел: +7 (495) 123-45-67</p>
+    <p>&copy; 2024 Магазин товаров</p>
+  </footer>
+</body>
+</html>
